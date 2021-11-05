@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "imageUrl": "https://static.toiimg.com/thumb/53096885.cms?width=1200&height=900",
+      "name": "Cake",
+      "count": 4,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": "2000g",
+      "comments": [
+        {
+          "id": 1,
+          "productId": 1,
+          "description": "some text here",
+          "date": "14:22 22.08.2021"
+        },
+        {
+          "id": 4,
+          "productId": 1,
+          "description": "some text here",
+          "date": "12:15 05.11.2021"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://static.sscontent.com/prodimg/thumb/500/500/products/124/v995725_prozis_cheeseus-crunchy-cheese-bites-emmental_2.jpg",
+      "name": "Cheese",
+      "count": 10,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": "200g",
+      "comments": [
+        {
+          "id": 3,
+          "productId": 2,
+          "description": "some text here",
+          "date": "14:00 22.08.2021"
+        },
+        {
+          "id": 7,
+          "productId": 2,
+          "description": "some text here",
+          "date": "12:02 05.11.2021"
+        }
+      ]
+    }
+  ]
+}
