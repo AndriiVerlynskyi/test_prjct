@@ -1,3 +1,9 @@
+### 'json-server --watch db.json'
+
+in root folder to start the server on port 3000 (npm install -g json-server to install)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

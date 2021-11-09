@@ -4,8 +4,19 @@ import {
     FETCH_PRODUCTS_DENIED,
     SAVE_PRODUCT_REQUEST,
     SAVE_PRODUCT_SUCCESS,
-    SAVE_PRODUCT_DENIED
+    SAVE_PRODUCT_DENIED,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_DENIED,
+    FETCH_PRODUCT_BY_ID_REQUEST,
+    FETCH_PRODUCT_BY_ID_SUCCESS,
+    FETCH_PRODUCT_BY_ID_DENIED
 } from '../types';
+import { 
+    changeConfModalOnDeniedProductDelete,
+    changeConfModalOnSuccessProductDelete,
+    changeConfModalOnDeniedProductSave,
+    changeConfModalOnSuccessProductSave
+} from './confModal';
 
 const fetchProductsRequest = () => {
     return {
@@ -13,7 +24,6 @@ const fetchProductsRequest = () => {
         isLoading:true
     }
 }
-
 const fetchProductsSuccess = products => {
     return {
         type: FETCH_PRODUCTS_SUCCESS,
@@ -21,7 +31,6 @@ const fetchProductsSuccess = products => {
         payload: products
     }
 }
-
 const fetchProductsDenied = error => {
     return {
         type: FETCH_PRODUCTS_DENIED,
@@ -54,45 +63,112 @@ export const fetchProducts = () => {
 const saveProductRequest = () => {
     return {
         type: SAVE_PRODUCT_REQUEST,
-        isLoading:true,
-        isSaved: null
+        isLoading:true
     }
 }
-
 const saveProductSuccess = () => {
     return {
         type: SAVE_PRODUCT_SUCCESS,
-        isLoading: false,
-        isSaved: true
+        isLoading: false
     }
 }
-
 const saveProductDenied = err => {
     return {
         type: SAVE_PRODUCT_DENIED,
         isLoading: false,
-        isSaved: false,
-        saveError: err
+        error: err
     }
 }
 
-export const savePost = post => {
+export const saveProduct = product => {
     return (dispatch) => {
         dispatch(saveProductRequest());
         fetch('http://localhost:3000/products', {
             method: 'POST',
-            body: JSON.stringify(post), 
+            body: JSON.stringify(product), 
             headers: {
               'Content-Type': 'application/json; charset=UTF-8'
             }
         })
             .then( resp => {
                 if(resp.status === 201){
-                    dispatch(saveProductSuccess())
+                    dispatch(saveProductSuccess());
+                    dispatch(changeConfModalOnSuccessProductSave(product.name));
+                    dispatch(fetchProducts());
                 }
             })
             .catch( err => {
-                dispatch(saveProductDenied(err))
+                dispatch(saveProductDenied(err));
+                dispatch(changeConfModalOnDeniedProductSave(product.name))
             })
     }
 }
+
+const deleteProductSuccess = () =>{
+    return {
+        type: DELETE_PRODUCT_SUCCESS
+    }
+}
+const deleteProductDenied = err =>{
+    return {
+        type: DELETE_PRODUCT_DENIED,
+        error: err
+    }
+}
+
+export const deleteProduct = (id, name) => {
+    return (dispatch) => {
+        fetch(`http://localhost:3000/products/${id}`,{
+            method: 'DELETE',
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+            },
+        })
+            .then(
+                resp => {
+                    if (resp.status === 200) {
+                        dispatch(deleteProductSuccess())
+                        dispatch(changeConfModalOnSuccessProductDelete(true, name));
+                        setTimeout(() => {
+                            dispatch(changeConfModalOnSuccessProductDelete(false, name));
+                        }, 2000)
+                        dispatch(fetchProducts())
+                    } else {
+                        throw Error("Delete wasn't successful")
+                    }
+                }
+            )
+            .catch(
+                (err) => {
+                    dispatch(deleteProductDenied(err));
+                    dispatch(changeConfModalOnDeniedProductDelete(name))
+                }
+            )
+    }
+}
+
+
+
+const fetchProductByIdRequest = () => {
+    return {
+        type: FETCH_PRODUCT_BY_ID_REQUEST,
+        isLoading: true
+    }
+}
+
+const fetchProductByIdSuccess = product => {
+    return {
+        type: FETCH_PRODUCT_BY_ID_SUCCESS,
+        isLoading: false,
+        payload: product
+    }
+}
+
+const fetchProductByIdDenied = err => {
+    return {
+        type: FETCH_PRODUCT_BY_ID_DENIED,
+        isLoading: false,
+        error: err
+    }
+}
+

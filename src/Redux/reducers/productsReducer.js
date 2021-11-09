@@ -4,15 +4,23 @@ import {
     FETCH_PRODUCTS_DENIED,
     SAVE_PRODUCT_REQUEST,
     SAVE_PRODUCT_SUCCESS,
-    SAVE_PRODUCT_DENIED
+    SAVE_PRODUCT_DENIED,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_DENIED,
+    FETCH_PRODUCT_BY_ID_REQUEST,
+    FETCH_PRODUCT_BY_ID_SUCCESS,
+    FETCH_PRODUCT_BY_ID_DENIED
 } from '../types';
 
 const initialState = {
     isLoading: false,
     products: [],
-    error: null,
-    isSaved: null,
-    saveError: null
+    errors:{
+        getError: null,
+        saveError: null,
+        deleteError: null,
+        getByIdError: null
+    }
 }
 
 const productReducer = (state = initialState, action) => {
@@ -32,25 +40,42 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: action.isLoading,
-                error: action.payload
+                errors:{
+                    ...state.errors,
+                    getError: action.payload
+                }
             }
         case SAVE_PRODUCT_REQUEST:
             return {
                 ...state,
-                isLoading: action.isLoading,
-                isSaved: action.isSaved
+                isLoading: action.isLoading
             }
         case SAVE_PRODUCT_SUCCESS:
             return {
                 ...state,
-                isLoading: action.isLoading,
-                isSaved: action.isSaved
+                isLoading: action.isLoading
             }
         case SAVE_PRODUCT_DENIED:
             return {
                 ...state,
                 isLoading: action.isLoading,
-                isSaved: action.isSaved
+                errors:{
+                    ...state.errors,
+                    saveError: action.error
+                }
+            }
+        case DELETE_PRODUCT_SUCCESS:
+            return state
+
+
+
+        case DELETE_PRODUCT_DENIED:
+            return {
+                ...state,
+                errors:{
+                    ...state.errors,
+                    deleteError: action.error
+                }
             }
         default:
             return state
