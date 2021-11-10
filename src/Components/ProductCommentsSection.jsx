@@ -17,7 +17,6 @@ const ProductCommentsSection = ({productId}) => {
 
     const handleDeleteComment = (commentId) => {
         dispatch(deleteComment(productId, commentId))
-        setShow(false)
     }
 
     const commentsData = useSelector( state => state.commentsData);
@@ -43,7 +42,7 @@ const ProductCommentsSection = ({productId}) => {
             <ToastContainer className="p-4">
                 {comments.map(comment => {
                     return (
-                            <Toast key={comment.id} show={show} onClose={() => {
+                            <Toast key={comment.id} onClose={() => {
                                     handleDeleteComment(comment.id)
                                 }}>
                                 <Toast.Header>

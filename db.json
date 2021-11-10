@@ -53,22 +53,10 @@
       "date": "14:22 22.08.2021"
     },
     {
-      "id": 4,
-      "productId": 2,
-      "description": "some text here",
-      "date": "12:15 05.11.2021"
-    },
-    {
       "id": 5,
       "productId": 1,
       "description": "some text here",
       "date": "14:22 22.08.2021"
-    },
-    {
-      "id": 10,
-      "productId": 2,
-      "description": "some text here",
-      "date": "12:15 05.11.2021"
     },
     {
       "id": 11,
@@ -87,6 +75,12 @@
       "date": "10.11.2021, 21:42:49",
       "productId": "3",
       "id": 13
+    },
+    {
+      "description": "Other one",
+      "date": "10.11.2021, 22:15:43",
+      "productId": "2",
+      "id": 14
     }
   ]
 }
