@@ -9,46 +9,84 @@
         "width": 200,
         "height": 200
       },
-      "weight": "2000g",
-      "comments": [
-        {
-          "id": 1,
-          "productId": 1,
-          "description": "some text here",
-          "date": "14:22 22.08.2021"
-        },
-        {
-          "id": 4,
-          "productId": 1,
-          "description": "some text here",
-          "date": "12:15 05.11.2021"
-        }
-      ]
+      "weight": 2500
     },
     {
-      "id": 2,
-      "imageUrl": "https://static.sscontent.com/prodimg/thumb/500/500/products/124/v995725_prozis_cheeseus-crunchy-cheese-bites-emmental_2.jpg",
-      "name": "Cheese",
-      "count": 10,
       "size": {
         "width": 200,
         "height": 200
       },
-      "weight": "200g",
-      "comments": [
-        {
-          "id": 3,
-          "productId": 2,
-          "description": "some text here",
-          "date": "14:00 22.08.2021"
-        },
-        {
-          "id": 7,
-          "productId": 2,
-          "description": "some text here",
-          "date": "12:02 05.11.2021"
-        }
-      ]
+      "id": 2,
+      "imageUrl": "https://static.sscontent.com/prodimg/thumb/500/500/products/124/v995725_prozis_cheeseus-crunchy-cheese-bites-emmental_2.jpg",
+      "name": "Cheese",
+      "count": 10,
+      "weight": 150
+    },
+    {
+      "imageUrl": "https://assets.bonappetit.com/photos/5f84743360f032defe1f5376/16:9/w_2560%2Cc_limit/Pullman-Loaf-Lede-new.jpg",
+      "name": "Bread",
+      "size": {
+        "width": "100",
+        "height": "29"
+      },
+      "weight": "450",
+      "count": "17",
+      "id": 3
+    },
+    {
+      "size": {
+        "width": "1",
+        "height": ""
+      },
+      "imageUrl": "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg",
+      "name": "Any",
+      "weight": "1",
+      "count": "17",
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "productId": 1,
+      "description": "some text here",
+      "date": "14:22 22.08.2021"
+    },
+    {
+      "id": 4,
+      "productId": 2,
+      "description": "some text here",
+      "date": "12:15 05.11.2021"
+    },
+    {
+      "id": 5,
+      "productId": 1,
+      "description": "some text here",
+      "date": "14:22 22.08.2021"
+    },
+    {
+      "id": 10,
+      "productId": 2,
+      "description": "some text here",
+      "date": "12:15 05.11.2021"
+    },
+    {
+      "id": 11,
+      "productId": 2,
+      "description": "some text here",
+      "date": "14:22 22.08.2021"
+    },
+    {
+      "description": "NEW",
+      "date": "10.11.2021, 21:36:54",
+      "productId": "4",
+      "id": 12
+    },
+    {
+      "description": "AND WHAT?",
+      "date": "10.11.2021, 21:42:49",
+      "productId": "3",
+      "id": 13
     }
   ]
 }

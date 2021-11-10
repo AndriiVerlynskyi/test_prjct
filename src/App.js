@@ -14,6 +14,7 @@ function App() {
           </Route>
           <Route exact path="/products/:id" element={<SingleProduct/>}>
           </Route>
+          <Route exact path="/product/sortByAlphabet"></Route>
         </Routes>
       </div>
     </Router>

@@ -3,7 +3,9 @@ import {
     SAVE_PRODUCT_DENIED,
     DELETE_PRODUCT_SUCCESS,
     DELETE_PRODUCT_DENIED,
-    HIDE_CONFIRMATION_MODAL
+    HIDE_CONFIRMATION_MODAL,
+    DELETE_COMMENT_FOR_PRODUCT_SUCCESS,
+    DELETE_COMMENT_FOR_PRODUCT_DENIED
 } from '../types';
 
 export const changeConfModalOnSuccessProductSave = name => {
@@ -37,6 +39,23 @@ export const changeConfModalOnDeniedProductDelete = name => {
         showConfModal:true
     }
 }
+
+export const changeConfModalOnSuccessCommentDelete = id => {
+    return {
+        type: DELETE_COMMENT_FOR_PRODUCT_SUCCESS,
+        confModalText: `${id} was deleted`,
+        showConfModal:true
+    } 
+}
+
+export const changeConfModalOnDeniedCommentDelete = id => {
+    return {
+        type: DELETE_COMMENT_FOR_PRODUCT_DENIED,
+        confModalText: `${id} wasn't deleted`,
+        showConfModal:true
+    } 
+}
+
 
 export const hideConfirmationModal = () => {
     return {

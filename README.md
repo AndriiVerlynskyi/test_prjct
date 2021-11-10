@@ -1,6 +1,6 @@
-### 'json-server --watch db.json'
+### npm run json:server
 
-in root folder to start the server on port 3000 (npm install -g json-server to install)
+in root folder to start the server on port 3000 (npm install -g json-server to install json-server)
 
 
 

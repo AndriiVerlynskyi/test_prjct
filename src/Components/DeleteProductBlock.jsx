@@ -19,10 +19,10 @@ const DeleteProductBlock = ({id, name}) => {
   
     return (
       <>
-        <Button variant="outline-danger" onClick={handleShow} size="sm">
+        <Button variant='outline-danger' onClick={handleShow}>
           Delete
         </Button>
-  
+
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>

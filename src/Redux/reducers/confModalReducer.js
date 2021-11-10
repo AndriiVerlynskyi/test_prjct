@@ -3,7 +3,9 @@ import {
     SAVE_PRODUCT_DENIED,
     DELETE_PRODUCT_SUCCESS,
     DELETE_PRODUCT_DENIED,
-    HIDE_CONFIRMATION_MODAL
+    HIDE_CONFIRMATION_MODAL,
+    DELETE_COMMENT_FOR_PRODUCT_SUCCESS,
+    DELETE_COMMENT_FOR_PRODUCT_DENIED
 } from '../types';
 
 const initialState = {
@@ -38,12 +40,25 @@ const confModalReducer = (state = initialState, action) => {
                     confModalText: action.confModalText,
                     showConfModal: action.showConfModal
                 }
+            case DELETE_COMMENT_FOR_PRODUCT_SUCCESS:
+                return {
+                    ...state,
+                    confModalText: action.confModalText,
+                    showConfModal: action.showConfModal
+                }
+            case DELETE_COMMENT_FOR_PRODUCT_DENIED:
+                return {
+                    ...state,
+                    confModalText: action.confModalText,
+                    showConfModal: action.showConfModal
+                }
 
             case HIDE_CONFIRMATION_MODAL:
                 return {
                     ...state,
                     showConfModal: action.showConfModal
                 }
+
             default :
                 return state
         }

@@ -9,7 +9,12 @@ import {
     DELETE_PRODUCT_DENIED,
     FETCH_PRODUCT_BY_ID_REQUEST,
     FETCH_PRODUCT_BY_ID_SUCCESS,
-    FETCH_PRODUCT_BY_ID_DENIED
+    FETCH_PRODUCT_BY_ID_DENIED,
+    EDIT_PRODUCT_REQUEST,
+    EDIT_PRODUCT_SUCCESS,
+    EDIT_PRODUCT_DENIED,
+    SORT_PRODUCTS_BY_ALPHABET,
+    SORT_PRODUCTS_BY_COUNT
 } from '../types';
 import { 
     changeConfModalOnDeniedProductDelete,
@@ -39,10 +44,10 @@ const fetchProductsDenied = error => {
     }
 }
 
-export const fetchProducts = () => {
+export const fetchProducts = (sortBySelector = '') => {
   return (dispatch) => {
       dispatch(fetchProductsRequest());
-      fetch("http://localhost:3000/products")
+      fetch("http://localhost:3000/products"+sortBySelector)
         .then(res => {
             if (!res.ok){
                 throw Error('Fetch request is denied')
@@ -121,7 +126,7 @@ export const deleteProduct = (id, name) => {
         fetch(`http://localhost:3000/products/${id}`,{
             method: 'DELETE',
             headers: {
-            'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+            'Content-type': 'application/json; charset=UTF-8' 
             },
         })
             .then(
@@ -172,3 +177,94 @@ const fetchProductByIdDenied = err => {
     }
 }
 
+export const fetchProductById = id => {
+    return (dispatch) => {
+        dispatch(fetchProductByIdRequest());
+        fetch(`http://localhost:3000/products/${id}`)
+          .then(res => {
+              if (!res.ok){
+                  throw Error('Fetch request is denied')
+              } else {
+                  return res.json()
+              }
+          })
+          .then(product => {
+              dispatch(fetchProductByIdSuccess(product))
+          })
+          .catch(err => {
+              dispatch(fetchProductByIdDenied(err.message))
+          })
+    }  
+  }
+
+
+const editProductRequest = () => {
+    return {
+        type: EDIT_PRODUCT_REQUEST,
+        isLoading: true
+    }
+}
+
+const editProductSuccess = () => {
+    return {
+        type: EDIT_PRODUCT_SUCCESS,
+        isLoading: false
+    }
+}
+
+const editProductDenied = err => {
+    return {
+        type: EDIT_PRODUCT_DENIED,
+        isLoading: false,
+        error: err
+    }
+}
+
+export const editProduct = (product, editedProduct) => {
+    return (dispatch) => {
+        dispatch(editProductRequest())
+        fetch('http://localhost:3000/products/'+product.id, {
+            method: 'PUT',
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8'  
+            },
+            body: JSON.stringify(editedProduct)
+        })
+            .then( res => {
+                if(res.ok){
+                    dispatch(editProductSuccess())
+                    dispatch(fetchProductById(product.id))
+                }
+            })
+            .catch( err => dispatch(editProductDenied(err)))
+    }
+}
+
+
+const sortProductsByAlphabetAction = () => {
+    return {
+        type: SORT_PRODUCTS_BY_ALPHABET,
+        sortedBy: 'alphabet'
+    }
+}
+
+const sortProductsByCountAction = () => {
+        return {
+            type: SORT_PRODUCTS_BY_COUNT,
+            sortedBy: 'count'
+        }
+}
+
+export const sortProductsByAlphabet = () => {
+    return (dispatch) => {
+        dispatch(fetchProducts('?_sort=name&_order=asc'));
+        dispatch(sortProductsByAlphabetAction())
+    }
+}
+
+export const sortProductsByCount = () => {
+    return (dispatch) => {
+        dispatch(fetchProducts('?_sort=count&_order=asc'))
+        dispatch(sortProductsByCountAction())
+    }
+}

@@ -1,0 +1,3 @@
+{
+    "/products/:productId/comments/:commentId" : "/comments/:commentId"
+}
