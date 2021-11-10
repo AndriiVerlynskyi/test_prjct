@@ -34,12 +34,12 @@
       "id": 3
     },
     {
-      "size": {
-        "width": "1",
-        "height": ""
-      },
       "imageUrl": "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg",
       "name": "Any",
+      "size": {
+        "width": "1",
+        "height": "2"
+      },
       "weight": "1",
       "count": "17",
       "id": 4

@@ -23,25 +23,59 @@ const EditProductBlock = () => {
     const product = useSelector( state => state.productsData.singleProduct)
 
     const onSubmit = (inputsData) => {
-        const clearInputData = (obj) => {
-            for (const propName in obj) {
-                if (typeof obj[propName] !== 'object'){
-                    if (
-                    obj[propName] === '' ||
-                    obj[propName] === null ||
-                    obj[propName] === undefined
-                ) {
-                    delete obj[propName];
-                }}
-            }
-            return obj;
+        // const clearInputData = (obj) => {
+        //     const checkIfObject = (object) => {
+        //         for (const propName in object) {
+        //         if (typeof object[propName] !== 'object'){
+        //             if (
+        //             object[propName] === '' ||
+        //             object[propName] === null ||
+        //             object[propName] === undefined
+        //         ) {
+        //             delete object[propName];
+        //         }} else {
+        //             checkIfObject(object[propName])
+        //         }
+        //     }}
+        //     checkIfObject(obj)
+        //     return obj;
+        // }
+        // const editedProductData = clearInputData(inputsData);
+
+        const combineObjects = (obj1, obj2) => {
+            const checkIfObject = (object1, object2) => {
+                for (let propName in object1){
+                    if(typeof object2[propName] !== 'object'){
+                        if (
+                        object2[propName] === '' ||
+                        object2[propName] === null ||
+                        object2[propName] === undefined
+                        ){
+                            if (
+                            object1[propName] !== '' ||
+                            object1[propName] !== null ||
+                            object1[propName] !== undefined
+                            ){
+                                const fulfilledProp = object1[propName]
+                                object2[propName] = fulfilledProp
+                            } else {
+                                delete object2[propName]
+                            }
+                        }
+                    } else {
+                        checkIfObject(object1[propName], object2[propName])
+                    }
+            }}
+            checkIfObject(obj1, obj2);
+            return obj2
         }
-        const editedFields = clearInputData(inputsData);
+
+        const cleanedObj = combineObjects(product, inputsData)
 
         const editedProduct = {
-            ...product,
-            ...editedFields
+            ...cleanedObj
         }
+        console.log(editedProduct)
         dispatch(editProduct(product, editedProduct))
     }
 
